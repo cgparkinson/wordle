@@ -1,5 +1,6 @@
 from termcolor import colored
 import random
+from time import sleep
 
 with open('vocab.txt', 'r') as f:
     vocab = f.readlines()
@@ -29,7 +30,7 @@ while finished == 0:
     print("\033[A                             \033[A")    # ansi escape arrow up then overwrite the line
     
     if word_raw not in dictionary:
-        print("invalid")
+        print(colored("invalid",'red'))
     else:
         guesses.append(word_raw)
         word = list(word_raw)
