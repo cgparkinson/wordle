@@ -1,5 +1,6 @@
 #!/bin/python3
 import random
+import time
 
 class bcolors:
     HEADER = '\033[95m'
@@ -22,6 +23,9 @@ with open('dictionary.txt', 'r') as f:
     dictionary = [line for line in dictionary if len(line) == 5]
 
 finished = 0
+seed = time.strftime("%Y%m%d%H%M")
+random.seed(int(seed))
+print("Welcome to Fake Wordle.\nA new word every minute.\nThis minute is: " + seed[-2:])
 correct_word = random.choice(vocab)
 guesses = []
 # print("DEBUG correct word is", correct_word)
