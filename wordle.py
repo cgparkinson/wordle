@@ -25,7 +25,7 @@ with open('dictionary.txt', 'r') as f:
 finished = 0
 seed = time.strftime("%Y%m%d%H%M")
 random.seed(int(seed))
-print("Welcome to Fake Wordle.\nA new word every minute.\nThis minute is: " + seed[-2:])
+print("Welcome to Fake Wordle.\nA new word every minute.\nIf playing with a friend, \ncheck this number is the \nsame for all players: " + seed[-2:])
 correct_word = random.choice(vocab)
 guesses = []
 # print("DEBUG correct word is", correct_word)
