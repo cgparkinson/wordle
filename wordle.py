@@ -1,6 +1,16 @@
-from termcolor import colored
+#!/bin/python3
 import random
-from time import sleep
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 with open('vocab.txt', 'r') as f:
     vocab = f.readlines()
@@ -30,14 +40,14 @@ while finished == 0:
     print("\033[A                             \033[A")    # ansi escape arrow up then overwrite the line
     
     if word_raw not in dictionary:
-        print(colored("invalid",'red'))
+        print(bcolors.FAIL + "invalid" + bcolors.ENDC)
     else:
         guesses.append(word_raw)
         word = list(word_raw)
         filtered_correct_word = list(correct_word)
         for letter_ref in range(len(word)):
             if word[letter_ref]==correct_word[letter_ref]:
-                colors[letter_ref] = 'green'
+                colors[letter_ref] = bcolors.OKGREEN
                 filtered_correct_word[letter_ref] = '?'
 
         for letter_ref in range(len(word)):
@@ -45,14 +55,15 @@ while finished == 0:
 
             if letter in filtered_correct_word:
                 if not colors[letter_ref]:
-                    colors[letter_ref] = 'yellow'
+                    colors[letter_ref] = bcolors.WARNING
                 filtered_correct_word = remove_first(filtered_correct_word, letter)
 
         for letter_ref in range(len(word)):
-            print(colored(word[letter_ref], colors[letter_ref]), end='')
+            color = colors[letter_ref] if colors[letter_ref] else ""
+            print(color + word[letter_ref] + bcolors.ENDC, end='')
         print('')
     if word_raw == correct_word:
         finished=1
-    if len(guesses) == 6:
+    elif len(guesses) == 6:
         finished=1
         print("you suck. correct word was", correct_word)
