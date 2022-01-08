@@ -22,10 +22,11 @@ with open('dictionary.txt', 'r') as f:
     dictionary = [line.replace('\n','') for line in dictionary]
     dictionary = [line for line in dictionary if len(line) == 5]
 
+dictionary = dictionary + vocab
 finished = 0
-seed = time.strftime("%Y%m%d%H%M")
+seed = int(time.time()/60)
 random.seed(int(seed))
-print("Welcome to Fake Wordle.\nA new word every minute.\nIf playing with a friend, \ncheck this number is the \nsame for all players: " + seed[-2:])
+print("Welcome to Fake Wordle.\nA new word every minute.\nIf playing with a friend, \ncheck this number is the \nsame for all players: " + str(seed)[-2:])
 correct_word = random.choice(vocab)
 guesses = []
 # print("DEBUG correct word is", correct_word)
