@@ -1,6 +1,7 @@
 #!/bin/python3
 import random
 import time
+import string
 
 class bcolors:
     HEADER = '\033[95m'
@@ -27,6 +28,7 @@ finished = 0
 seed = int(time.time()/60)
 random.seed(int(seed))
 print("Welcome to Fake Wordle.\nA new word every minute.\nIf playing with a friend, \ncheck this number is the \nsame for all players: " + str(seed)[-2:])
+print("=========================")
 correct_word = random.choice(vocab)
 guesses = []
 # print("DEBUG correct word is", correct_word)
@@ -39,10 +41,28 @@ def remove_first(word, letter):
             return word
     raise(NotImplementedError)
 
+def print_letters(correct_word, guesses):
+    letters = list(string.ascii_lowercase)
+    guesses_concat = [letter for guess in guesses for letter in guess]
+    print("=========================")
+    for letter in letters:
+        if letter in guesses_concat and letter not in correct_word:
+            pass
+        elif letter in guesses_concat:
+            print(bcolors.WARNING + letter + bcolors.ENDC, end='')
+        elif letter not in guesses_concat:
+            print(letter, end='')
+    print("")
+    print("=========================")
+
 while finished == 0:
+    print_letters(correct_word, guesses)
     word_raw = input()
     colors = [None, None, None, None, None]
     print("\033[A                             \033[A")    # ansi escape arrow up then overwrite the line
+    print("\033[A                                              \033[A")    # ansi escape arrow up then overwrite the line
+    print("\033[A                                              \033[A")    # ansi escape arrow up then overwrite the line
+    print("\033[A                                              \033[A")    # ansi escape arrow up then overwrite the line
     
     if word_raw not in dictionary:
         print(bcolors.FAIL + "invalid" + bcolors.ENDC)
