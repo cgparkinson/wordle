@@ -81,7 +81,7 @@ while finished == 0:
             if letter in filtered_correct_word:
                 if not colors[letter_ref]:
                     colors[letter_ref] = bcolors.WARNING
-                filtered_correct_word = remove_first(filtered_correct_word, letter)
+                    filtered_correct_word = remove_first(filtered_correct_word, letter)
 
         for letter_ref in range(len(word)):
             color = colors[letter_ref] if colors[letter_ref] else ""
